@@ -6,14 +6,12 @@ import { useContext, useEffect, useState } from 'react';
 
 export default function Products() {
 
-	const { user } = useContext(UserContext);
 	const [ allProducts, setAllProducts ] = useState([])
 
 	const fetchData = () => {
 		fetch('http://localhost:4000/products/all')
 		.then(res => res.json())
 		.then(data => {
-			console.log(data)
 			setAllProducts(data)
 		})
 	}
@@ -21,6 +19,8 @@ export default function Products() {
 		fetchData()
 	}, [])
 
+	const { user } = useContext(UserContext);
+	console.log(user.isAdmin)
 	return(
 		<>
 
