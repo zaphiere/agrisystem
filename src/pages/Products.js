@@ -1,35 +1,35 @@
-import ProductCard from '../components/ProductCard';
-import productData from '../mockData/productData';
-import { Row, Col } from 'react-bootstrap';
-import { Container } from 'react-bootstrap';
+import UserContext from '../UserContext';
+import AdminView from '../components/AdminView';
+import UserView from '../components/UserView';
+import { useContext, useEffect, useState } from 'react';
+
 
 export default function Products() {
-	const products = productData.map(singleProduct => {
 
-		return(
-			<ProductCard key={ singleProduct.id } productProp={ singleProduct }/>
-			)
-	})
+	const { user } = useContext(UserContext);
+	const [ allProducts, setAllProducts ] = useState([])
+
+	const fetchData = () => {
+		fetch('http://localhost:4000/products/all')
+		.then(res => res.json())
+		.then(data => {
+			console.log(data)
+			setAllProducts(data)
+		})
+	}
+	useEffect(() => {
+		fetchData()
+	}, [])
 
 	return(
-		<Container>
-		<Row className="mt-3">
-			<Col>
-				<h3>Products</h3>
-				<Row>
-					<Col md={2}>
-						<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odit accusantium consectetur dolore excepturi at blanditiis magnam earum facere reprehenderit! Distinctio rem magnam, quod officiis! Odio quo corrupti accusamus ut porro.</p>  
-					</Col>
-					<Col md={10}>
-						<Row>
-							{ products }
-						</Row>
-					</Col>
-				</Row>
-			</Col>
-		</Row>
-		</Container>
+		<>
 
+			{(user.isAdmin === true) ?
+				<AdminView productData={allProducts} fetchData={fetchData}/>
+				:
+				<UserView  productData={allProducts}/>
+			}
+		</>
 
 		)
 }

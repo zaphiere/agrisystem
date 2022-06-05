@@ -1,14 +1,15 @@
 import { useState, useEffect, useContext } from 'react';
 import { Row, Col, Form, Button } from 'react-bootstrap';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import UserContext from '../UserContext';
 import Swal from 'sweetalert2';
 
 
 export default function Login() {
 
-	const { user, setUser } = useContext(UserContext);
 
+	const navigate = useNavigate()
+	const { user, setUser } = useContext(UserContext);
 	const [ email, setEmail ] = useState('');
 	const [ password, setPassword ] = useState('');
 	const [ isActive, setIsActive ] = useState(true);
@@ -26,23 +27,62 @@ export default function Login() {
 	function authentication(e) {
 		e.preventDefault();
 
-		localStorage.setItem('email',email);
-
-		setUser({
-			email: localStorage.getItem('email')
+		fetch('http://localhost:4000/users/login', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({
+				email: email,
+				password: password
+			})
 		})
-		setEmail('');
-		setPassword('');
+		.then(res => res.json())
+		.then(data => {
+			if(data.accessToken !== undefined){
+				localStorage.setItem('accessToken', data.accessToken);
+				setUser({
+					accessToken: data.accessToken
+				})
 
-		Swal.fire({
-			title: 'Yay!',
-			icon: 'success',
-			text: `${email} has been verified! Welcome!`
+				Swal.fire({
+					title: 'Login Success',
+					icon: 'success',
+					text: 'You are now login!'
+				})
+
+				fetch('http://localhost:4000/users/details', {
+					headers: {
+						Authorization: `Bearer ${data.accessToken}`
+					}
+				})
+				.then(res => res.json())
+				.then(data => {
+					if(data.isAdmin === true){
+						localStorage.setItem('isAdmin', data.isAdmin)
+
+						setUser({
+							isAdmin:data.isAdmin
+						})
+						navigate('/products')
+					}else{
+						navigate('/')
+					}
+				})
+				
+			}else{
+				Swal.fire({
+					title: 'Failed To Login',
+					icon: 'error',
+					text: 'Something went wrong. Check your Credentials'
+				})
+			}
+			setEmail('')
+			setPassword('')
 		})
+
 	}
 
 	return (
-		(user.email !== null)?
+		(user.accessToken !== null)?
 		<Navigate to="/products" />
 
 		:
@@ -59,7 +99,7 @@ export default function Login() {
 								<Form.Label>Email</Form.Label>
 								<Form.Control 
 									type="email"
-									placeHolder="Please enter your email"
+									placeholder="Please enter your email"
 									required
 									value={email}
 									onChange={e => setEmail(e.target.value)}
@@ -70,7 +110,7 @@ export default function Login() {
 								<Form.Label>Password</Form.Label>
 								<Form.Control 
 									type="password"
-									placeHolder="Please enter your password"
+									placeholder="Please enter your password"
 									required
 									value={password}
 									onChange={e => setPassword(e.target.value)}

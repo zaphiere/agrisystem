@@ -3,16 +3,16 @@ import { Card, Button, Col } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
 export default function ProductCard({productProp}) {
-	const { name, picture, price } = productProp;
+	const { productName, picture, price } = productProp;
 
 	return(
 		<Col md={3} className="mb-4" >
 		<Card>
 			<Card.Img
-				src= { picture }
+				src= "https://via.placeholder.com/180x180.png"
 			/>
 			<Card.Body>
-				<Card.Title> { name } </Card.Title>
+				<Card.Title> { productName } </Card.Title>
 				<Card.Text>Php { price }</Card.Text>
 				<Button>Check</Button>
 			</Card.Body>
