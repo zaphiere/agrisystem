@@ -4,6 +4,8 @@ import { Row, Col, Container } from 'react-bootstrap';
 import ArchiveProduct from './ArchiveProduct';
 import EditProduct from './EditProduct';
 import DeleteProduct from './DeleteProduct';
+import AddProduct from './AddProduct';
+
 
 
 export default function AdminView(props) {
@@ -43,6 +45,7 @@ export default function AdminView(props) {
 		<Container>
 			<div className="text-center my-4">
 				<h1>Admin Dashboard</h1>
+				<AddProduct fetchData={fetchData} />
 			</div>
 			<Table striped bordered hover responsive>
 				<thead className="bg-dark text-white">

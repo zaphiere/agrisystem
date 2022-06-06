@@ -13,8 +13,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
 
-    const [ user,setUser ] = useState({
-        email: localStorage.getItem('email')
+    const [ user, setUser ] = useState({
+        accessToken: localStorage.getItem('accessToken'),
+        isAdmin: localStorage.getItem('isAdmin') === 'true'
     })
     const unsetUser = () => {
         localStorage.clear();
