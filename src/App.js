@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Products from './pages/Products';
 import Logout from './pages/Logout';
+import SpecificProduct from './pages/SpecificProduct';
 import PageNotFound from './components/404-page';
 import { useState } from 'react';
 import { UserProvider } from './UserContext';
@@ -27,6 +28,7 @@ function App() {
             <StickyNav />
                 <Routes>
                     <Route path="/products" element={ <Products />} />
+                    <Route path="/products/:productId" element={ <SpecificProduct />} />
                     <Route path="/register" element={ <Register />} />
          
                     <Route path="/" element={ <Home />} />

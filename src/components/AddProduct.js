@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
 import Swal from 'sweetalert2';
+import Uploady from "@rpldy/uploady";
+import UploadButton from "@rpldy/upload-button"
 
 
 export default function AddProduct({fetchData}) {
@@ -58,6 +60,7 @@ export default function AddProduct({fetchData}) {
 			<Button variant="primary" onClick={openAdd}>Add New Product</Button>
 
 			<Modal show={showAdd} onHide={closeAdd}>
+				<Uploady destination={{url:process.env.PUBLIC_URL+"../images"}}><UploadButton>Upload</UploadButton></Uploady>
 				<Form onSubmit={e => addProduct(e)}>
 					<Modal.Header closeButton>
 						<Modal.Title>Add Product</Modal.Title>

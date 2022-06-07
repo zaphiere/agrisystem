@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Card, Button, Col } from 'react-bootstrap';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 export default function ProductCard({productProp}) {
-	const { productName, picture, price } = productProp;
+	const { _id, productName, picture, price } = productProp;
 
 	return(
 		<Col md={3} className="mb-4" >
@@ -14,7 +15,7 @@ export default function ProductCard({productProp}) {
 			<Card.Body>
 				<Card.Title> { productName } </Card.Title>
 				<Card.Text>Php { price }</Card.Text>
-				<Button>Check</Button>
+				<Button variant="primary" as={ Link } to={`/products/${_id}`}>Check</Button>
 			</Card.Body>
 		</Card>
 		</Col>
