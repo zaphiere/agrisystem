@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 
 
 
-export default function CartCard({cartProp, fetchData}) {
+export default function CartCard({cartProp}) {
 	
 	const { _id, name, price, quantity, subTotal } = cartProp;
 
@@ -24,8 +24,7 @@ export default function CartCard({cartProp, fetchData}) {
 		.then(data => {
 			
 			if(data){
-				// document.location.reload();
-				fetchData()
+				document.location.reload();
 			}else{
 				Swal.fire({
 					title: 'error!',
