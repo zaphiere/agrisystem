@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
-import CartCard from './CartCard'
+import CartCard from './CartCard';
+import CartCheckout from './CartCheckout';
 import { Navigate } from 'react-router-dom';
 
 
-export default function CartView({cartData}) {
+export default function CartView(props) {
 
-	const { cartStuff, fetchData} = cartData;
+	const { cartData, fetchData} = props;
 
 	const [ cartItems, setCartItems ] = useState([])
 	const [ productTotal, setProductTotal ] = useState(0)
@@ -15,13 +16,15 @@ export default function CartView({cartData}) {
 		const cartItemsArr = cartData.map(cartItem => {
 			productSum += cartItem.subTotal;
 			return(
+				<>
 				<CartCard key={cartItem._id} cartProp={cartItem} fetchData={fetchData} />
-				
+				<CartCheckout key={cartItem._id} cartProp={cartItem} fetchData={fetchData} />
+				</>
 			)
 		})
 		setProductTotal(productSum)
 		setCartItems(cartItemsArr)
-	}, [cartData])
+	}, [props])
 
 	return(
 		<>
@@ -29,7 +32,9 @@ export default function CartView({cartData}) {
 			{ cartItems }
 
 			<h3>Total</h3> 
+			<>
 			{ productTotal }
+			</>
 		</>
 		)
 }

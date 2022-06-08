@@ -7,9 +7,12 @@ import Swal from 'sweetalert2';
 
 
 
-export default function CartCard({cartProp}) {
+export default function CartCard({cartProp, fetchData}) {
 	
 	const { _id, name, price, quantity, subTotal } = cartProp;
+	const [ cartQuantity, setCartQuantity ] = useState(quantity);
+
+	
 
 	const deleteCartItem = () => {
 		
@@ -24,7 +27,8 @@ export default function CartCard({cartProp}) {
 		.then(data => {
 			
 			if(data){
-				document.location.reload();
+				// document.location.reload();
+				fetchData();
 			}else{
 				Swal.fire({
 					title: 'error!',
@@ -35,16 +39,52 @@ export default function CartCard({cartProp}) {
 		})
 	}
 
+	
+	const cartEdit = (e) => {
+		e.preventDefault();
+
+			fetch(`http://localhost:4000/carts/${ _id }`, {
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${ localStorage.getItem('accessToken') 
+					}`
+				},
+				body: JSON.stringify({
+					quantity: cartQuantity
+				})
+			})
+			.then(res => res.json())
+			.then(data => {
+				if(data){
+					fetchData()
+				}else {
+					Swal.fire({
+						title: 'error',
+						icon: 'error',
+						text: 'Something went wrong'
+					})
+					fetchData()
+				}
+			})
+		}
+	
 
 	return(
-		<Form>
+		<Form onSubmit ={e => cartEdit(e, _id)}>
 		<Card className="mt-3">
 			<Card.Body>
 				<Card.Title> { name } </Card.Title>
 				<Card.Subtitle>Price:</Card.Subtitle>
 				<Card.Text> { price } </Card.Text>
 				<Card.Subtitle>Quantity:</Card.Subtitle>
-				<Card.Text> { quantity } </Card.Text>
+				<Form.Control
+					type="number"
+					required
+					value={cartQuantity}
+					onChange={e => setCartQuantity(e.target.value)}
+				/>
+				<Button variant="dark" type="submit" size="sm">Update Quantity</Button>
 				<Card.Subtitle> Subtotal: </Card.Subtitle>
 				<Card.Text> { subTotal } </Card.Text>
 				<Card.Subtitle> Delete: </Card.Subtitle>
