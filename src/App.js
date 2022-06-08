@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Products from './pages/Products';
+import Cart from './pages/Cart';
 import Logout from './pages/Logout';
 import SpecificProduct from './pages/SpecificProduct';
 import PageNotFound from './components/404-page';
@@ -30,6 +31,7 @@ function App() {
                     <Route path="/products" element={ <Products />} />
                     <Route path="/products/:productId" element={ <SpecificProduct />} />
                     <Route path="/register" element={ <Register />} />
+                    <Route path="/cart" element={ <Cart />} />
          
                     <Route path="/" element={ <Home />} />
                     <Route path="/login" element={ <Login />} />

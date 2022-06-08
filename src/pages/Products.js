@@ -20,7 +20,6 @@ export default function Products() {
 	}, [])
 
 	const { user } = useContext(UserContext);
-	console.log(user.isAdmin)
 	return(
 		<>
 

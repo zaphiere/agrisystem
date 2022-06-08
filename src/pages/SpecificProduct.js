@@ -26,14 +26,7 @@ export default function SpecificProduct() {
 	const { user } = useContext(UserContext);
 
 	const addCart = (productId, e) => {
-		if(quantity == 0){
-			Swal.fire({
-				title: 'error!',
-				icon: 'error',
-				text: 'Add quantity'
-			})
-			navigate(`/products`)
-		}
+		
 		fetch('http://localhost:4000/carts/addcart', {
 			method: 'POST',
 			headers: {
