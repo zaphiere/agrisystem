@@ -14,7 +14,7 @@ export default function EditProduct({ product, fetchData }){
 
 
 	const openEdit = (productId) => {
-		fetch(`https://agribusinessecommerce.herokuapp.com/${ productId }`)
+		fetch(`https://agribusinessecommerce.herokuapp.com/products/${ productId }`)
 		.then(res => res.json())
 		.then(data => {
 
