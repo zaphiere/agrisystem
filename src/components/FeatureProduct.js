@@ -16,7 +16,7 @@ export default function FeatureProduct({ product, isFeature, fetchData }) {
 				Swal.fire({
 					title: 'Confirmed',
 					icon: 'success',
-					text: 'Product successfully Featured'
+					text: 'Product No Longer Featured'
 				})
 				fetchData()
 			}else {
@@ -43,7 +43,7 @@ export default function FeatureProduct({ product, isFeature, fetchData }) {
 				Swal.fire({
 					title: 'Confirmed',
 					icon: 'success',
-					text: 'Product no longer featured'
+					text: 'Product Successfully Featured'
 				})
 				fetchData()
 			}else {
