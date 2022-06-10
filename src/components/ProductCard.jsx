@@ -1,10 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Card, Button, Col, Row } from 'react-bootstrap';
 import PropTypes from 'prop-types';
+import UserContext from '../UserContext';
 import { Link } from 'react-router-dom';
+
+
 
 export default function ProductCard({productProp}) {
 	const { _id, productName, image, price } = productProp;
+
+	const { user } = useContext(UserContext);
 
 	return(
 		<Col xs={6} md={3} className="mb-4" >
@@ -20,7 +25,11 @@ export default function ProductCard({productProp}) {
 					</Col>
 				</Row>
 			</Card.Body>
-			<Button variant="outline-danger" as={ Link } to={`/products/${_id}`}>Check</Button>
+			{(user.isAdmin === true) ?
+				<Button variant="outline-danger">Disabled</Button>
+				:
+				<Button variant="outline-danger" as={ Link } to={`/products/${_id}`}>Check</Button>
+			}
 		</Card>
 		</Col>
 		)
