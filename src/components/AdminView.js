@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Table } from 'react-bootstrap';
 import { Row, Col, Container } from 'react-bootstrap';
 import ArchiveProduct from './ArchiveProduct';
+import FeatureProduct from './FeatureProduct';
 import EditProduct from './EditProduct';
 import DeleteProduct from './DeleteProduct';
 import AddProduct from './AddProduct';
@@ -26,6 +27,9 @@ export default function AdminView(props) {
 					<td className={product.isActive ? "text-success" : "text-danger"}>
 						{product.isActive ? "Available" : "Unavailable"}
 					</td>
+					<td className={product.isFeature ? "text-success" : "text-danger"}>
+						{product.isFeature ? "Featured" : "Unfeatured"}
+					</td>
 					<td>
 						<EditProduct product={product._id} fetchData={fetchData} />
 					</td>
@@ -34,6 +38,9 @@ export default function AdminView(props) {
 					</td>
 					<td>
 						<DeleteProduct product={product._id} fetchData={fetchData} />
+					</td>
+					<td>
+						<FeatureProduct product={product._id} isFeature={product.isFeature} fetchData={fetchData} />
 					</td>
 				</tr>
 			)
@@ -55,9 +62,11 @@ export default function AdminView(props) {
 						<th>DESCRIPTION</th>
 						<th>PRICE</th>
 						<th>AVAILABILITY</th>
-						<th>ACTIONS</th>
+						<th>FEATURED</th>
+						<th>ACTION</th>
 						<th>ARCHIVE</th>
 						<th>DELETE</th>
+						<th>FEATURE</th>
 					</tr>
 				</thead>
 
