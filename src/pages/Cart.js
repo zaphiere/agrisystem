@@ -21,7 +21,6 @@ export default function Cart() {
 		})
 		.then(res => res.json())
 		.then(data => {
-			console.log(data)
 			if(data){
 				setCartItems(data)
 			}else{
@@ -39,15 +38,14 @@ export default function Cart() {
 
 	return(
 		<>
-			{(user.isAdmin === true) ?
-				<Navigate to="/products" />
-				:
+			{user.accessToken !== null  ?
 				<Container>
 					<CartView cartData={cartItems} fetchData={fetchData}/>
 				</Container>
+				:
+				<Navigate to="/login" />
 			}
-				
-			
+						
 		</>
 		)
 }

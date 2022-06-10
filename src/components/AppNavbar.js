@@ -15,7 +15,9 @@ export default function AppNavbar() {
 					<Nav.Link as={Link} to="/products">Products</Nav.Link>
 
 					{(user.accessToken !== null) ?
-						<Nav.Link as={Link} to ="/logout">Logout</Nav.Link>
+						<>
+							<Nav.Link as={Link} to ="/logout">Logout</Nav.Link>
+						</>
 						:
 						<>
 							<Nav.Link as={Link} to="/register">Sign Up</Nav.Link>

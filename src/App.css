@@ -9,7 +9,7 @@ body {
 }
 
 .backgroundColor{
-  background-color: #292b2c;
+  background-color: #CC1126;
 }
 .whitebg{
   background-color: white;
@@ -18,3 +18,12 @@ body {
 .viewheight{
   height: 100vh;
 }
+
+.image{
+  max-width: 100%;
+  height: auto;
+}
+.image-bg{
+  background-image: url('https://i.ibb.co/Sn42jPF/log-in-splash.jpg');
+}
+

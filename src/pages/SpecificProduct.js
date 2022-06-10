@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from 'react';
-import { Container, Card, Button, Form } from 'react-bootstrap';
+import { Container, Card, Button, Form, Col, Row } from 'react-bootstrap';
 import UserContext from '../UserContext';
 import Swal from 'sweetalert2';
 import { useParams, Link, useNavigate } from 'react-router-dom';
@@ -10,6 +10,7 @@ export default function SpecificProduct() {
 	const { productId } = useParams();
 	const [ productName, setProductName ] = useState('');
 	const [ description, setDescription ] = useState('');
+	const [ image, setImage ] = useState('');
 	const [ price, setPrice ] = useState(0);
 	const [ quantity, setQuantity ] = useState(1);
 
@@ -19,10 +20,13 @@ export default function SpecificProduct() {
 		.then(data => {
 			setProductName(data.productName)
 			setDescription(data.description)
+			setImage(data.image)
 			setPrice(data.price)
 		})
 	}, [])
 	
+	console.log(price)
+
 	const { user } = useContext(UserContext);
 
 	const addCart = (productId, e) => {
@@ -60,34 +64,46 @@ export default function SpecificProduct() {
 	}
 
 	return(
-		<Container>
+		<Container className="viewheight mt-4">
 			<Form onSubmit={e => addCart(e)}>
 				<Card>
-					<Card.Header>
-						<h4>{ productName }</h4>
-					</Card.Header>
+					<Row>
+						<Col md={4}>
+							<Card.Img
+								src= {`http://localhost:4000/${ image }`}
+							/>
+							
+						</Col>
+						<Col md={8}>
+							<Card.Body>
+								<h2>{ productName }</h2>
+								<Card.Text>{ description }</Card.Text>
+								<h5 className="text-danger">Price: ₱ { price }</h5>
+								<Form.Group>
+									<Row className="mb-5">
+										<Col md={2}>
+											<Form.Label>Quantity</Form.Label>
+										</Col>
+										<Col md={2}>
+											<Form.Control 
+										      type="number"
+										      required
+										      value={quantity}
+										      onChange={e => setQuantity(e.target.value)}
+										 />
+										</Col>
+									</Row>
+									{ user.accessToken !== null ?
+										<Button variant="danger" onClick={() => addCart(productId)}>Add To Cart</Button>
+										:
+										<Button variant="warning" as={ Link } to="/login">Login to Add to Cart</Button>
+									 }
+								</Form.Group>		
+							</Card.Body>
 
-					<Card.Body>
-						<Card.Text>{ description }</Card.Text>
-						<h6>Price: Php { price }</h6>
-					</Card.Body>
-					<Form.Group>
-						<Form.Label>quantity</Form.Label>
-						<Form.Control 
-						      type="number"
-						      required
-						      value={quantity}
-						      onChange={e => setQuantity(e.target.value)}
-						 />
-					</Form.Group>
-					<Card.Footer>
-					{ user.accessToken !== null ?
-						<Button variant="primary" onClick={() => addCart(productId)}>Add To Cart</Button>
-						:
-						<Button variant="warning" as={ Link } to="/login">Login to Add to Cart</Button>
-					 }
 
-					</Card.Footer>
+						</Col>
+					</Row>
 				</Card>
 			</Form>
 		</Container>

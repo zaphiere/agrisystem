@@ -1,12 +1,20 @@
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Container } from 'react-bootstrap';
 
 export default function Footer() {
 	return(
-		<Row className="backgroundColor mx-auto">
-			<h4 className="text-white">Footer</h4>
-			<Col></Col>
-			<Col></Col>
-			<Col></Col>
+		<Row className="whitebg border-top mx-auto">
+			<Col>
+				<Container className="pt-4 text-secondary">
+					<Row>
+						<Col>
+							<p>Copyright ©  2022 Cluckers Agricultural Supply®. All rights reserved.</p>
+						</Col>
+						<Col>
+							
+						</Col>
+					</Row>
+				</Container>
+			</Col>
 		</Row>
 		)
 }

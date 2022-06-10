@@ -1,42 +1,39 @@
 import { Button, Row, Col } from 'react-bootstrap';
 import Carousel from 'react-bootstrap/Carousel';
 import { Container } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 export default function Banner() {
 	return(
 		<Row className="whitebg mx-auto">
 			<Col>
 				<Container>
 					<Row>
-						<Col md={8}>
+						<Col>
 							<Carousel>
 								<Carousel.Item>
 									<img
 									      className="d-block w-100"
-									      src="https://via.placeholder.com/800x300.png"
+									      src="https://i.ibb.co/QnZ18Vd/banner1.jpg"
 									      alt="First slide"
 									    />
-									    <Carousel.Caption>
-									      <h3>First slide label</h3>
-									      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-									    </Carousel.Caption>
+									    
 								</Carousel.Item>
 								<Carousel.Item>
 									<img
 									      className="d-block w-100"
-									      src="https://via.placeholder.com/800x300.png"
+									      src="https://i.ibb.co/VpGqKjY/banner-2.jpg"
 									      alt="First slide"
 									    />
-									    <Carousel.Caption>
-									      <h3>Second slide label</h3>
-									      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-									    </Carousel.Caption>
+									   
+								</Carousel.Item><Carousel.Item>
+									<img
+									      className="d-block w-100"
+									      src="https://i.ibb.co/QvXxz2D/banner-3.jpg"
+									      alt="First slide"
+									    />
+									    
 								</Carousel.Item>
 							</Carousel>
-						</Col>
-						<Col md={4} className="p-5">
-							<h1 className="mb-3">Welcome To Agri Farm</h1>
-							<p className="mb-3">For your agricultural Needs</p>
-							<Button variant="dark">Shop Now!</Button>
 						</Col>
 					</Row>
 				</Container>

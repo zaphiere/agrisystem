@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { Row, Col, Form, Button } from 'react-bootstrap';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate, Link } from 'react-router-dom';
 import UserContext from '../UserContext';
 import Swal from 'sweetalert2';
 
@@ -88,8 +88,8 @@ export default function Login() {
 		:
 		<Form onSubmit={e => authentication(e)}>
 			<Row className="justify-content-center mx-auto viewheight">
-				<Col md={8} className="backgroundColor">
-					
+				<Col md={8} className="image-bg">
+
 				</Col>
 				<Col md={4} className="p-3">
 					<Row>
@@ -117,10 +117,11 @@ export default function Login() {
 								/>
 							</Form.Group>
 							{ isActive?
-								<Button variant="dark" type="submit" className="mt-3">Submit</Button>
+								<Button variant="danger" type="submit" className="mt-3">Submit</Button>
 								:
-								<Button variant="dark" type="submit" className="mt-3" disabled>Submit</Button>
+								<Button variant="danger" type="submit" className="mt-3" disabled>Submit</Button>
 							}
+							<p className="mt-2">No account yet?<Button variant="link" className="text-danger pt-0" as={ Link } to="/register">Register Here!</Button></p>
 						</Col>
 					</Row>
 				</Col>

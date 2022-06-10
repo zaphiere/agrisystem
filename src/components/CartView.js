@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import CartCard from './CartCard';
 import CartCheckout from './CartCheckout';
 import { Navigate } from 'react-router-dom';
+import { Row, Col, Container } from 'react-bootstrap';
 
 
 export default function CartView(props) {
@@ -17,8 +18,7 @@ export default function CartView(props) {
 			productSum += cartItem.subTotal;
 			return(
 				<>
-				<CartCard key={cartItem._id} cartProp={cartItem} fetchData={fetchData} />
-				<CartCheckout key={cartItem._id} cartProp={cartItem} fetchData={fetchData} />
+					<CartCard key={cartItem._id} cartProp={cartItem} fetchData={fetchData} />
 				</>
 			)
 		})
@@ -27,14 +27,27 @@ export default function CartView(props) {
 	}, [props])
 
 	return(
-		<>
-			<h1>Cart View</h1>
-			{ cartItems }
+		<Row className="mt-3">
+			<Col md={12}>
+				<h2 className="text-danger">Shopping Cart</h2>
+				{ cartItems }
+			</Col>
+			<Col md={12}>
+			<Row className="py-4">
+				<Col md={1}>
+					<h5 style={{float: 'left'}}>Total:</h5> 
+				</Col>
+				<Col md={2} className="ps-0" >
+					<h3 className="text-danger" >₱ { productTotal }</h3>
+				</Col>
+				<Col md={{ span: 5, offset: 4 }} >
+					<CartCheckout />
+				</Col>
+			</Row>
 
-			<h3>Total</h3> 
-			<>
-			{ productTotal }
-			</>
-		</>
+				
+			</Col>
+		</Row>
+
 		)
 }

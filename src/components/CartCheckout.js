@@ -4,11 +4,12 @@ import PropTypes from 'prop-types';
 import UserContext from '../UserContext';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 
 export default function CartCheckout({ checkout, fetchData}) {
 
+	const navigate = useNavigate()
 	const userCheckout = () => {
 		Swal.fire({
 		  title: 'Are you sure?',
@@ -38,8 +39,8 @@ export default function CartCheckout({ checkout, fetchData}) {
 						icon: 'success',
 						text: 'product Successfully checkout'
 					})
-					fetchData()
-					
+					navigate('/')
+
 				}else{
 					Swal.fire({
 						title: 'error',
@@ -55,7 +56,9 @@ export default function CartCheckout({ checkout, fetchData}) {
 
 	}
 	return(
-		<Button variant="danger" size="sm" onClick={() => userCheckout(checkout)}>Checkout</Button>
+		<div>
+			<Button variant="danger"size="lg" style={{float: 'right'}} onClick={() => userCheckout(checkout)}>Checkout</Button>
+		</div>
 		)
 }
 	

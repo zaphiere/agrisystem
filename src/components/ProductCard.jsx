@@ -1,22 +1,26 @@
 import { useState, useEffect } from 'react';
-import { Card, Button, Col } from 'react-bootstrap';
+import { Card, Button, Col, Row } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 export default function ProductCard({productProp}) {
-	const { _id, productName, picture, price } = productProp;
+	const { _id, productName, image, price } = productProp;
 
 	return(
-		<Col md={3} className="mb-4" >
+		<Col xs={6} md={3} className="mb-4" >
 		<Card>
 			<Card.Img
-				src= "https://via.placeholder.com/180x180.png"
+				src= {`http://localhost:4000/${ image }`}
 			/>
-			<Card.Body>
-				<Card.Title> { productName } </Card.Title>
-				<Card.Text>Php { price }</Card.Text>
-				<Button variant="primary" as={ Link } to={`/products/${_id}`}>Check</Button>
+			<Card.Body className="pb-0">
+				<Row>
+					<Col>
+						<h6 className="mb-0"> { productName } </h6>
+						<h4 className="text-danger">₱{ price }</h4>
+					</Col>
+				</Row>
 			</Card.Body>
+			<Button variant="outline-danger" as={ Link } to={`/products/${_id}`}>Check</Button>
 		</Card>
 		</Col>
 		)

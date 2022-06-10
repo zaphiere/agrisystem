@@ -1,16 +1,23 @@
 import { useState } from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
 import Swal from 'sweetalert2';
-import Uploady from "@rpldy/uploady";
-import UploadButton from "@rpldy/upload-button"
+import axios from 'axios';
+
 
 
 export default function AddProduct({fetchData}) {
 	const [ name, setName ] = useState('');
 	const [ description, setDescription ] = useState('');
 	const [ price, setPrice ] = useState(0);
+	const [ image, setImage ] = useState('')
+
 
 	const [ showAdd, setShowAdd ] = useState(false);
+
+	const handleChange = (e) => {
+		console.log(e.target.files)
+		setImage(e.target.files[0])
+	}
 
 	const openAdd = () => setShowAdd(true);
 	const closeAdd = () => setShowAdd(false);
@@ -18,16 +25,47 @@ export default function AddProduct({fetchData}) {
 	const addProduct = (e) => {
 		e.preventDefault();
 
-		fetch('http://localhost:4000/products/create', {
+		const formData = new FormData();
+		formData.append('name', name);
+		formData.append('description', description);
+		formData.append('price', price);
+		formData.append('image', image);
+	
+		// const url = 'http://localhost:4000/products/create';
+		axios.post("http://localhost:4000/products/create", formData, {
+			headers: {
+				"Content-Type": "multipart/form-data",
+				Authorization: `Bearer ${ localStorage.getItem('accessToken') }`
+			},
+		})
+		.then((res) => {
+			Swal.fire({
+					title: 'Success',
+					icon: 'success',
+					text: 'Product successfully added'
+				})
+				closeAdd()
+				fetchData()
+		})
+		.catch((err) => {
+			console.log("fail")
+			console.log(err);
+		})
+
+		setName('')
+		setDescription('')
+		setPrice(0)
+
+		/*fetch('http://localhost:4000/products/create', {
 			method: 'POST',
 			headers: {
-				'Content-Type' : 'application/json',
+				'Content-Type' : 'multipart/form-data',
 				Authorization: `Bearer ${ localStorage.getItem('accessToken') }`
 			},
 			body: JSON.stringify({
 				name: name,
 				description: description,
-				price: price
+				price: price,
 			})
 		})
 		.then(res => res.json())
@@ -52,7 +90,7 @@ export default function AddProduct({fetchData}) {
 			setName('')
 			setDescription('')
 			setPrice(0)
-		})
+		})*/
 	}
 
 	return(
@@ -60,7 +98,6 @@ export default function AddProduct({fetchData}) {
 			<Button variant="primary" onClick={openAdd}>Add New Product</Button>
 
 			<Modal show={showAdd} onHide={closeAdd}>
-				<Uploady destination={{url:process.env.PUBLIC_URL+"../images"}}><UploadButton>Upload</UploadButton></Uploady>
 				<Form onSubmit={e => addProduct(e)}>
 					<Modal.Header closeButton>
 						<Modal.Title>Add Product</Modal.Title>
@@ -100,7 +137,10 @@ export default function AddProduct({fetchData}) {
 							<Form.Label>Image</Form.Label>
 							<Form.Control 
 							      type="file"
-							    
+							      required
+							      // value={image}
+							      onChange={handleChange}
+
 							 />
 						</Form.Group>
 					</Modal.Body>

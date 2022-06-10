@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Card, Button, Form } from 'react-bootstrap';
+import { Card, Button, Form, Col, Row } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import UserContext from '../UserContext';
 import { Link } from 'react-router-dom';
@@ -72,25 +72,32 @@ export default function CartCard({cartProp, fetchData}) {
 
 	return(
 		<Form onSubmit ={e => cartEdit(e, _id)}>
-		<Card className="mt-3">
-			<Card.Body>
-				<Card.Title> { name } </Card.Title>
-				<Card.Subtitle>Price:</Card.Subtitle>
-				<Card.Text> { price } </Card.Text>
-				<Card.Subtitle>Quantity:</Card.Subtitle>
-				<Form.Control
-					type="number"
-					required
-					value={cartQuantity}
-					onChange={e => setCartQuantity(e.target.value)}
-				/>
-				<Button variant="dark" type="submit" size="sm">Update Quantity</Button>
-				<Card.Subtitle> Subtotal: </Card.Subtitle>
-				<Card.Text> { subTotal } </Card.Text>
-				<Card.Subtitle> Delete: </Card.Subtitle>
-				<Card.Text> <Button variant="danger" size="sm" onClick={() => deleteCartItem(_id)}>DELETE</Button> </Card.Text>
-			</Card.Body>
-		</Card>
+			<Card className="mt-3" key={_id}>
+				<Row>
+					<Col md={3} className="p-4">
+						<Card.Title> { name } </Card.Title>
+						<Card.Subtitle>Price:</Card.Subtitle>
+						<Card.Text> ₱ { price } </Card.Text>
+					</Col>
+					<Col md={2} className="p-4">
+						<Card.Subtitle>Quantity:</Card.Subtitle>
+						<Form.Control
+							type="number"
+							required
+							value={cartQuantity}
+							onChange={e => setCartQuantity(e.target.value)}
+						/>
+						<Button variant="dark" type="submit" size="sm" className="mt-2">Update Quantity</Button>
+					</Col>
+					<Col md={3} className="p-4">
+						<Card.Subtitle> Subtotal: </Card.Subtitle>
+						<Card.Text> ₱ { subTotal } </Card.Text>
+					</Col>
+					<Col md={{ span: 2, offset: 2 }} className="p-4">
+ 						<Button variant="danger" onClick={() => deleteCartItem(_id)}>DELETE</Button> 
+					</Col>
+				</Row>
+			</Card>
 		</Form>
 
 		)

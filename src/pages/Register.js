@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { Row, Col, Form, Button } from 'react-bootstrap';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate, Link } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import UserContext from '../UserContext'
 import Swal from 'sweetalert2';
@@ -80,7 +80,7 @@ export default function Register() {
 		<Container>
 			<Row className="justify-content-center viewheight">
 				<Col md={8} className="p-5">
-					<h4>Register New Account</h4>
+					<h4 className="text-danger">Register New Account</h4>
 					<Row className="whitebg mt-4 justify-content-center p-3">
 						<Col md={6}>
 							<Form.Group className="mb-2">
@@ -149,11 +149,11 @@ export default function Register() {
 							</Form.Group>
 								<p className="mt-3 text-black-50">By proceeding to sign up, I acknowledge that I have read and consented to the Terms of Use and Privacy Policy</p>
 								{isActive ?
-									<Button variant="dark" type="submit">Submit</Button>
+									<Button variant="danger" type="submit">Submit</Button>
 									:
-									<Button variant="dark" type="submit" disabled>Submit</Button>
+									<Button variant="danger" type="submit" disabled>Submit</Button>
 								}
-								<p className="mt-2">Already have an account? Sign in</p>
+								<p className="mt-2">Already have an account?<Button variant="link" className="text-danger pt-0" as={ Link } to="/login"> Sign in</Button></p>
 						</Col>
 					</Row>
 				</Col>
