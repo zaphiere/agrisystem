@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 export default function ArchiveProduct({ product, isActive, fetchData }) {
 
 	const archiveToggle = (productId) => {
-		fetch (`http://localhost:4000/products/${ productId }/archive` ,{
+		fetch (`https://agribusinessecommerce.herokuapp.com/products/${ productId }/archive` ,{
 			method: 'PUT',
 			headers: {
 				Authorization: `Bearer ${ localStorage.getItem('accessToken') }`
@@ -31,7 +31,7 @@ export default function ArchiveProduct({ product, isActive, fetchData }) {
 	}
 
 	const unArchiveToggle = (productId) => {
-		fetch (`http://localhost:4000/products/${ productId }/unarchive` ,{
+		fetch (`https://agribusinessecommerce.herokuapp.com/products/${ productId }/unarchive` ,{
 			method: 'PUT',
 			headers: {
 				Authorization: `Bearer ${ localStorage.getItem('accessToken') }`

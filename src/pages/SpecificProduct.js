@@ -15,7 +15,7 @@ export default function SpecificProduct() {
 	const [ quantity, setQuantity ] = useState(1);
 
 	useEffect(() => {
-		fetch(`http://localhost:4000/products/${ productId }`)
+		fetch(`https://agribusinessecommerce.herokuapp.com/products/${ productId }`)
 		.then(res => res.json())
 		.then(data => {
 			setProductName(data.productName)
@@ -31,7 +31,7 @@ export default function SpecificProduct() {
 
 	const addCart = (productId, e) => {
 		
-		fetch('http://localhost:4000/carts/addcart', {
+		fetch('https://agribusinessecommerce.herokuapp.com/carts/addcart', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -70,7 +70,7 @@ export default function SpecificProduct() {
 					<Row>
 						<Col md={4}>
 							<Card.Img
-								src= {`http://localhost:4000/${ image }`}
+								src= {`https://agribusinessecommerce.herokuapp.com/${ image }`}
 							/>
 							
 						</Col>

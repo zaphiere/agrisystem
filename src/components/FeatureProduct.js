@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 export default function FeatureProduct({ product, isFeature, fetchData }) {
 
 	const featureToggle = (productId) => {
-		fetch (`http://localhost:4000/products/${ productId }/removefeature` ,{
+		fetch (`https://agribusinessecommerce.herokuapp.com/products/${ productId }/removefeature` ,{
 			method: 'PUT',
 			headers: {
 				Authorization: `Bearer ${ localStorage.getItem('accessToken') }`
@@ -31,7 +31,7 @@ export default function FeatureProduct({ product, isFeature, fetchData }) {
 	}
 
 	const unFeatureToggle = (productId) => {
-		fetch (`http://localhost:4000/products/${ productId }/featuring` ,{
+		fetch (`https://agribusinessecommerce.herokuapp.com/products/${ productId }/featuring` ,{
 			method: 'PUT',
 			headers: {
 				Authorization: `Bearer ${ localStorage.getItem('accessToken') }`

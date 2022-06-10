@@ -32,7 +32,7 @@ export default function AddProduct({fetchData}) {
 		formData.append('image', image);
 	
 		// const url = 'http://localhost:4000/products/create';
-		axios.post("http://localhost:4000/products/create", formData, {
+		axios.post("https://agribusinessecommerce.herokuapp.com/products/create", formData, {
 			headers: {
 				"Content-Type": "multipart/form-data",
 				Authorization: `Bearer ${ localStorage.getItem('accessToken') }`

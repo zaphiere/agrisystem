@@ -30,7 +30,7 @@ export default function Register() {
 	function userRegistration(e){
 		e.preventDefault()
 
-		fetch('http://localhost:4000/users/register', {
+		fetch('https://agribusinessecommerce.herokuapp.com/users/register', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',

@@ -21,7 +21,7 @@ export default function CartCheckout({ checkout, fetchData}) {
 		  confirmButtonText: 'Checkout'
 		}).then((result) => {
 		  if (result.isConfirmed) {
-			fetch(`http://localhost:4000/checkouts/final`,{
+			fetch(`https://agribusinessecommerce.herokuapp.com/checkouts/final`,{
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',

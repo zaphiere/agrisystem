@@ -16,7 +16,7 @@ export default function CartCard({cartProp, fetchData}) {
 
 	const deleteCartItem = () => {
 		
-		fetch(`http://localhost:4000/carts/${ _id }/delete`, {
+		fetch(`https://agribusinessecommerce.herokuapp.com/carts/${ _id }/delete`, {
 			method: 'DELETE',
 			headers: {
 				'Content-Type': 'application/json',
@@ -43,7 +43,7 @@ export default function CartCard({cartProp, fetchData}) {
 	const cartEdit = (e) => {
 		e.preventDefault();
 
-			fetch(`http://localhost:4000/carts/${ _id }`, {
+			fetch(`https://agribusinessecommerce.herokuapp.com/carts/${ _id }`, {
 				method: 'PUT',
 				headers: {
 					'Content-Type': 'application/json',

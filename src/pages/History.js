@@ -8,7 +8,7 @@ export default function Products() {
 	const [ userCheckout, setUserCheckout ] = useState([])
 
 	const fetchData = () => {
-		fetch('http://localhost:4000/checkouts/view', {
+		fetch('https://agribusinessecommerce.herokuapp.com/checkouts/view', {
 			method: 'GET',
 			headers: {
 				'Content-Type' : 'application/json',

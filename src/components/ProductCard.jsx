@@ -15,7 +15,7 @@ export default function ProductCard({productProp}) {
 		<Col xs={6} md={3} className="mb-4" >
 		<Card>
 			<Card.Img
-				src= {`http://localhost:4000/${ image }`}
+				src= {`https://agribusinessecommerce.herokuapp.com/${ image }`}
 			/>
 			<Card.Body className="pb-0">
 				<Row>

@@ -12,7 +12,7 @@ export default function ProductSearch() {
 
 	const fetchData = () => {
 	console.log(productName)
-		fetch(`http://localhost:4000/products/active/${productName}`)
+		fetch(`https://agribusinessecommerce.herokuapp.com/products/active/${productName}`)
 		.then(res => res.json())
 		.then(data => {
 			if(data === false){

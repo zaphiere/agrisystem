@@ -8,7 +8,7 @@ export default function Feature() {
 	const [ allProducts, setAllProducts ] = useState([])
 
 	const fetchData = () => {
-		fetch('http://localhost:4000/products/feature')
+		fetch('https://agribusinessecommerce.herokuapp.com/products/feature')
 		.then(res => res.json())
 		.then(data => {
 			setAllProducts(data)

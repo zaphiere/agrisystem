@@ -12,7 +12,7 @@ export default function Cart() {
 	const [ cartItems, setCartItems ] = useState([])
 
 	const fetchData = () => {
-		fetch('http://localhost:4000/carts/view', {
+		fetch('https://agribusinessecommerce.herokuapp.com/carts/view', {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',

@@ -14,7 +14,7 @@ export default function DeleteProduct({ product, fetchData }) {
 		  confirmButtonText: 'Delete'
 		}).then((result) => {
 		  if (result.isConfirmed) {
-			fetch(`http://localhost:4000/products/${ productId }/delete`,{
+			fetch(`https://agribusinessecommerce.herokuapp.com/${ productId }/delete`,{
 				method: 'DELETE',
 				headers: {
 					Authorization: `Bearer ${ localStorage.getItem('accessToken')}`
