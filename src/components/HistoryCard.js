@@ -14,7 +14,7 @@ export default function HistoryCard({productProp}) {
 	const [ userCheckout, setUserCheckout ] = useState([])
 
 	const fetchData = () => {
-		fetch(`http://localhost:4000/checkouts/${ _id }/viewproducts/`, {
+		fetch(`https://agribusinessecommerce.herokuapp.com/checkouts/${ _id }/viewproducts/`, {
 			method: 'GET',
 			headers: {
 				'Content-Type' : 'application/json',
