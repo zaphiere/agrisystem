@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
 import { Row, Col, Container } from 'react-bootstrap';
-import HistoryCard from './HistoryCard'
+import HistoryProductCard from './HistoryProductCard'
 
-export default function HistoryView({productData}) {
+export default function HistoryProductView({productData}) {
 
 	const [products, setProducts] = useState([])
 
 	useEffect(() => {
 		const productsArr = productData.map(product => {
 				return(
-					<HistoryCard key={product._id} productProp={product} />
+					<HistoryProductCard key={product._id} productProp={product} />
 					)
 
 		})
@@ -19,11 +19,9 @@ export default function HistoryView({productData}) {
 	}, [productData])
 
 	return(
-		<Container>
-			<h2>Order History</h2>
+		<>
 			{products}
-		</Container>
-
+		</>
 
 
 		)
