@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import CartCard from './CartCard';
 import CartCheckout from './CartCheckout';
-import { Navigate } from 'react-router-dom';
-import { Row, Col, Container } from 'react-bootstrap';
+import { Navigate, Link } from 'react-router-dom';
+import { Row, Col, Container, Button } from 'react-bootstrap';
 
 
 export default function CartView(props) {
@@ -30,6 +30,7 @@ export default function CartView(props) {
 		<Row className="mt-3">
 			<Col md={12}>
 				<h2 className="text-danger">Shopping Cart</h2>
+				<Button variant="outline-danger" as={ Link } to={`/history`}>Order History</Button>
 				{ cartItems }
 			</Col>
 			<Col md={12}>

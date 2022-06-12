@@ -1,5 +1,5 @@
 import UserContext from '../UserContext';
-import UserCheckoutHistory from '../components/UserCheckoutHistory';
+import HistoryView from '../components/HistoryView';
 import { useContext, useEffect, useState } from 'react';
 
 
@@ -25,8 +25,8 @@ export default function Products() {
 	}, [])
 	const { user } = useContext(UserContext);
 	return(
-
-			<UserCheckoutHistory productData={userCheckout}/>
+			// <h1>Hello</h1>
+			<HistoryView productData={userCheckout} fetchData={fetchData}/>
 
 		)
 }
